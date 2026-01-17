@@ -1,0 +1,47 @@
+/*
+====================================================
+  INICIAR DATA WAREHOUSE - PSQL SCRIPT
+  Banco de dados: data_warehouse
+  Schemas: bronze, silver, gold
+====================================================
+*/
+
+-- ============================================
+-- 1. Criar banco de dados se não existir
+-- ============================================
+
+SELECT 'CREATE DATABASE data_warehouse'
+WHERE NOT EXISTS (
+    SELECT 1
+    FROM pg_database
+    WHERE datname = 'data_warehouse'
+)\gexec
+
+-- ============================================
+-- 2. Conectar ao banco de dados
+-- ============================================
+
+\c data_warehouse
+
+-- ============================================
+-- 3. Criar schemas
+-- ============================================
+
+CREATE SCHEMA IF NOT EXISTS bronze;
+CREATE SCHEMA IF NOT EXISTS silver;
+CREATE SCHEMA IF NOT EXISTS gold;
+
+-- ============================================
+-- 4. Validação
+-- ============================================
+
+SELECT
+    current_database() AS database,
+    schema_name
+FROM information_schema.schemata
+WHERE schema_name IN ('bronze','silver','gold')
+ORDER BY schema_name;
+
+-- ============================================
+-- Fim
+-- ============================================
