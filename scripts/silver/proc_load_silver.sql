@@ -36,7 +36,6 @@
 ====================================================
 */
 
-
 CREATE OR REPLACE PROCEDURE silver.load_silver()
 LANGUAGE plpgsql
 AS $$
@@ -95,15 +94,13 @@ BEGIN
     WHERE flag_last = 1;
 
     GET DIAGNOSTICS v_rows = ROW_COUNT;
-
     step_end := clock_timestamp();
 
-    RAISE NOTICE '   Linhas inseridas: %', v_rows;
-    RAISE NOTICE '   Tempo: % segundos',
-        EXTRACT(EPOCH FROM step_end - step_start);
+    RAISE NOTICE '   Linhas: % | Tempo: % s',
+        v_rows, EXTRACT(EPOCH FROM step_end - step_start);
 
 EXCEPTION WHEN OTHERS THEN
-    RAISE WARNING '   ERRO silver.crm_cust_info -> %', SQLERRM;
+    RAISE WARNING '   ERRO crm_cust_info -> %', SQLERRM;
 END;
 
 --------------------------------------------------------
@@ -112,6 +109,8 @@ END;
 BEGIN
     RAISE NOTICE '-> Iniciando: silver.crm_prd_info';
     step_start := clock_timestamp();
+
+    TRUNCATE TABLE silver.crm_prd_info;
 
     INSERT INTO silver.crm_prd_info (
         prd_id, cat_id, prd_key, prd_nm,
@@ -140,15 +139,13 @@ BEGIN
     FROM bronze.crm_prd_info;
 
     GET DIAGNOSTICS v_rows = ROW_COUNT;
-
     step_end := clock_timestamp();
 
-    RAISE NOTICE '   Linhas inseridas: %', v_rows;
-    RAISE NOTICE '   Tempo: % segundos',
-        EXTRACT(EPOCH FROM step_end - step_start);
+    RAISE NOTICE '   Linhas: % | Tempo: % s',
+        v_rows, EXTRACT(EPOCH FROM step_end - step_start);
 
 EXCEPTION WHEN OTHERS THEN
-    RAISE WARNING '   ERRO silver.crm_prd_info -> %', SQLERRM;
+    RAISE WARNING '   ERRO crm_prd_info -> %', SQLERRM;
 END;
 
 --------------------------------------------------------
@@ -157,6 +154,8 @@ END;
 BEGIN
     RAISE NOTICE '-> Iniciando: silver.crm_sales_details';
     step_start := clock_timestamp();
+
+    TRUNCATE TABLE silver.crm_sales_details;
 
     INSERT INTO silver.crm_sales_details (
         sls_ord_num, sls_prd_key, sls_cust_id,
@@ -168,7 +167,8 @@ BEGIN
         sls_prd_key,
         sls_cust_id,
         CASE
-            WHEN sls_order_dt = 0 OR LENGTH(sls_order_dt::TEXT) <> 8 THEN NULL
+            WHEN sls_order_dt = 0 OR LENGTH(sls_order_dt::TEXT) <> 8
+            THEN NULL
             ELSE sls_order_dt::TEXT::DATE
         END,
         sls_ship_dt::TEXT::DATE,
@@ -189,15 +189,13 @@ BEGIN
     FROM bronze.crm_sales_details;
 
     GET DIAGNOSTICS v_rows = ROW_COUNT;
-
     step_end := clock_timestamp();
 
-    RAISE NOTICE '   Linhas inseridas: %', v_rows;
-    RAISE NOTICE '   Tempo: % segundos',
-        EXTRACT(EPOCH FROM step_end - step_start);
+    RAISE NOTICE '   Linhas: % | Tempo: % s',
+        v_rows, EXTRACT(EPOCH FROM step_end - step_start);
 
 EXCEPTION WHEN OTHERS THEN
-    RAISE WARNING '   ERRO silver.crm_sales_details -> %', SQLERRM;
+    RAISE WARNING '   ERRO crm_sales_details -> %', SQLERRM;
 END;
 
 --------------------------------------------------------
@@ -206,6 +204,8 @@ END;
 BEGIN
     RAISE NOTICE '-> Iniciando: silver.erp_cust_az12';
     step_start := clock_timestamp();
+
+    TRUNCATE TABLE silver.erp_cust_az12;
 
     INSERT INTO silver.erp_cust_az12 (cid,bdate,gen)
     SELECT
@@ -225,15 +225,13 @@ BEGIN
     FROM bronze.erp_cust_az12;
 
     GET DIAGNOSTICS v_rows = ROW_COUNT;
-
     step_end := clock_timestamp();
 
-    RAISE NOTICE '   Linhas inseridas: %', v_rows;
-    RAISE NOTICE '   Tempo: % segundos',
-        EXTRACT(EPOCH FROM step_end - step_start);
+    RAISE NOTICE '   Linhas: % | Tempo: % s',
+        v_rows, EXTRACT(EPOCH FROM step_end - step_start);
 
 EXCEPTION WHEN OTHERS THEN
-    RAISE WARNING '   ERRO silver.erp_cust_az12 -> %', SQLERRM;
+    RAISE WARNING '   ERRO erp_cust_az12 -> %', SQLERRM;
 END;
 
 --------------------------------------------------------
@@ -242,6 +240,8 @@ END;
 BEGIN
     RAISE NOTICE '-> Iniciando: silver.erp_loc_a101';
     step_start := clock_timestamp();
+
+    TRUNCATE TABLE silver.erp_loc_a101;
 
     INSERT INTO silver.erp_loc_a101 (cid,cntry)
     SELECT
@@ -255,15 +255,13 @@ BEGIN
     FROM bronze.erp_loc_a101;
 
     GET DIAGNOSTICS v_rows = ROW_COUNT;
-
     step_end := clock_timestamp();
 
-    RAISE NOTICE '   Linhas inseridas: %', v_rows;
-    RAISE NOTICE '   Tempo: % segundos',
-        EXTRACT(EPOCH FROM step_end - step_start);
+    RAISE NOTICE '   Linhas: % | Tempo: % s',
+        v_rows, EXTRACT(EPOCH FROM step_end - step_start);
 
 EXCEPTION WHEN OTHERS THEN
-    RAISE WARNING '   ERRO silver.erp_loc_a101 -> %', SQLERRM;
+    RAISE WARNING '   ERRO erp_loc_a101 -> %', SQLERRM;
 END;
 
 --------------------------------------------------------
@@ -273,20 +271,20 @@ BEGIN
     RAISE NOTICE '-> Iniciando: silver.erp_px_cat_g1v2';
     step_start := clock_timestamp();
 
+    TRUNCATE TABLE silver.erp_px_cat_g1v2;
+
     INSERT INTO silver.erp_px_cat_g1v2 (id,cat,subcat,maintenance)
     SELECT id,cat,subcat,maintenance
     FROM bronze.erp_px_cat_g1v2;
 
     GET DIAGNOSTICS v_rows = ROW_COUNT;
-
     step_end := clock_timestamp();
 
-    RAISE NOTICE '   Linhas inseridas: %', v_rows;
-    RAISE NOTICE '   Tempo: % segundos',
-        EXTRACT(EPOCH FROM step_end - step_start);
+    RAISE NOTICE '   Linhas: % | Tempo: % s',
+        v_rows, EXTRACT(EPOCH FROM step_end - step_start);
 
 EXCEPTION WHEN OTHERS THEN
-    RAISE WARNING '   ERRO silver.erp_px_cat_g1v2 -> %', SQLERRM;
+    RAISE WARNING '   ERRO erp_px_cat_g1v2 -> %', SQLERRM;
 END;
 
 --------------------------------------------------------
