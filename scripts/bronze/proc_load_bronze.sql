@@ -1,11 +1,44 @@
 /*
 ====================================================
-  STORED PROCEDURE: LOAD_BRONZE
-  Database: data_warehouse
-  Camada: bronze
-  Descrição: Trunca e carrega todas as tabelas da camada bronze
-  com logs, tempo de execução individual, quantidade de linhas carregadas
-  e tempo total do load
+ STORED PROCEDURE: bronze.load_bronze
+ Database: data_warehouse
+ Camada: Bronze (camada bruta)
+ Tipo de carga: FULL LOAD
+
+ Descrição:
+ Esta stored procedure é responsável pela ingestão
+ completa dos dados brutos (raw data) para a camada
+ Bronze do Data Warehouse.
+
+ Funcionalidades:
+ - Executa TRUNCATE nas tabelas antes da carga
+ - Realiza ingestão via COPY a partir de arquivos CSV
+ - Registra logs detalhados por tabela
+ - Mede tempo de execução individual de cada carga
+ - Conta quantidade de linhas carregadas
+ - Mede tempo total de execução do processo
+ - Possui tratamento de erros por etapa (TRY/CATCH)
+ - Permite continuidade mesmo se uma tabela falhar
+
+ Objetivo da camada Bronze:
+ - Armazenar dados brutos sem transformação
+ - Garantir rastreabilidade da origem dos dados
+ - Servir como base para a camada Silver
+ - Manter integridade do dado original
+
+ Fonte de dados:
+ - CRM (cust_info, prd_info, sales_details)
+ - ERP (cust_az12, loc_a101, px_cat_g1v2)
+
+ Uso:
+ CALL bronze.load_bronze();
+
+ Observações:
+ - Deve ser executada antes da procedure:
+   silver.load_silver()
+ - Os caminhos dos arquivos CSV devem ser
+   ajustados conforme o ambiente
+
 ====================================================
 */
 
