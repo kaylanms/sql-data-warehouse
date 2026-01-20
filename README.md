@@ -44,4 +44,4 @@ Essa estrutura permite consultas analíticas eficientes, garantindo integridade 
 
 ![Schema](docs/star_schema.png)
 
--> Os dados utilizados neste projeto foram obtidos a partir do canal do YouTube Data with Baraa.
+> Os dados utilizados neste projeto foram obtidos a partir do canal do YouTube Data with Baraa.
