@@ -4,7 +4,7 @@ Este projeto demonstra a implementação de uma arquitetura completa de Data War
 
 # Arquitetura de dados
 
-![Data Architecture](docs/data_architecture)
+![Data Architecture](docs/data_architecture.gif)
 
 Bronze Layer: armazena dados brutos, sem transformações, replica exatamente o formato da origem, carga via Stored Procedure. Estratégia: TRUNCATE + INSERT
 
@@ -14,4 +14,4 @@ Gold Layer: Dados prontos para consumo, views analíticas, modelo dimensional (S
 
 # Modelo de dados
 
-![Modelo de dados](docs/data_model)
+![Modelo de dados](docs/data_model.gif)
