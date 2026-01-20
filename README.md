@@ -6,11 +6,11 @@ Este projeto demonstra a implementação de uma arquitetura completa de Data War
 
 ![Data Architecture](docs/data_architecture.gif)
 
-Bronze Layer: armazena dados brutos, sem transformações, replica exatamente o formato da origem, carga via Stored Procedure. Estratégia: TRUNCATE + INSERT
+**Bronze Layer**: armazena dados brutos, sem transformações, replica exatamente o formato da origem, carga via Stored Procedure. Estratégia: TRUNCATE + INSERT
 
-Silver Layer: dados tratados e padronizados, aplicação de regras de negócio, enriquecimento de dados, normalização de domínios, carga via Stored Procedure.
+**Silver Layer**: dados tratados e padronizados, aplicação de regras de negócio, enriquecimento de dados, normalização de domínios, carga via Stored Procedure.
 
-Gold Layer: Dados prontos para consumo, views analíticas, modelo dimensional (Star Schema), utilizado por BI, SQL e ML.
+**Gold Layer**: Dados prontos para consumo, views analíticas, modelo dimensional (Star Schema), utilizado por BI, SQL e ML.
 
 # Modelo de dados
 
