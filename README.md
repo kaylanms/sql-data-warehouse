@@ -1,4 +1,4 @@
-# | Data Warehouse
+# 🏠 Data Warehouse
 
 Este projeto demonstra a implementação de uma arquitetura completa de Data Warehouse, abordando desde a ingestão e processamento dos dados até a modelagem e organização das camadas. A solução foi estruturada seguindo boas práticas de engenharia de dados, com foco em performance, escalabilidade e qualidade das informações.
 
