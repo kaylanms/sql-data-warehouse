@@ -2,7 +2,7 @@
 
 Este projeto demonstra a implementação de uma arquitetura completa de Data Warehouse, abordando desde a ingestão e processamento dos dados até a modelagem e organização das camadas. A solução foi estruturada seguindo boas práticas de engenharia de dados, com foco em performance, escalabilidade e qualidade das informações.
 
-# Arquitetura de dados
+# > Arquitetura de dados
 
 ![Data Architecture](docs/data_architecture.gif)
 
@@ -12,6 +12,6 @@ Este projeto demonstra a implementação de uma arquitetura completa de Data War
 
 **Gold Layer**: Dados prontos para consumo, views analíticas, modelo dimensional (Star Schema), utilizado por BI, SQL e ML.
 
-# Modelo de dados
+# > Modelo de dados
 
 ![Modelo de dados](docs/data_model.gif)
