@@ -10,7 +10,7 @@ Este projeto demonstra a implementação de uma arquitetura completa de Data War
 
 **Silver Layer**: dados tratados e padronizados, aplicação de regras de negócio, enriquecimento de dados, normalização de domínios, carga via Stored Procedure.
 
-**Gold Layer**: Dados prontos para consumo, views analíticas, modelo dimensional (Star Schema), utilizado por BI, SQL e ML.
+**Gold Layer**: dados prontos para consumo, views analíticas, modelo dimensional (Star Schema), utilizado por BI, SQL e ML.
 
 # > Modelo de dados
 
