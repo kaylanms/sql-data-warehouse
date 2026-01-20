@@ -41,3 +41,5 @@ Tabela fato responsável por armazenar os dados transacionais de vendas. Possui 
 Essa estrutura permite consultas analíticas eficientes, garantindo integridade referencial, performance e flexibilidade para análises de negócio.
 
 ---
+
+![Schema](docs/schema.png)
