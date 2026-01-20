@@ -42,4 +42,4 @@ Essa estrutura permite consultas analíticas eficientes, garantindo integridade 
 
 ---
 
-![Schema](docs/schema.png)
+![Schema](docs/star_schema.png)
